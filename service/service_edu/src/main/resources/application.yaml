@@ -1,0 +1,42 @@
+server:
+  port: 8001
+  # 服务名
+spring:
+  application:
+    name: service-edu
+  # 环境设置：dev、test、prod
+  profiles:
+    active: dev
+  # mysql数据库连接
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/guli01?serverTimezone=GMT%2B8&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: root
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+
+  #返回json的全局时间格式
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+#开启熔断机制
+feign:
+  hystrix:
+    enabled: true
+  httpclient:
+    connection-timeout: 3
+
+mybatis-plus:
+  mapper-locations: classpath:com/atguigu/eduservice/mapper/xml/*.xml
+  #mybatis日志
+#  configuration:
+#      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#设置日志级别：WARN INFO DEBUG ERROR
+#logging:
+#  level:
+#    root: INFO
